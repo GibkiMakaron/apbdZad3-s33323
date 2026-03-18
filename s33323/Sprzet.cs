@@ -34,16 +34,16 @@ public class Aparat : Sprzet
     }
 }
 
-public class Laptop : Sprzet
+public class Sluchawki : Sprzet
 {
-    private int cale;
-    private string rozdzielczosc;
+    private int opor;
+    private bool ANC;
 
-    public Laptop(int cale, string rozdzielczosc)
+    public Sluchawki(int opor, bool ANC)
     {
         id = id++;
-        typ = "laptop";
-        this.cale =  cale;
-        this.rozdzielczosc =  rozdzielczosc;
+        typ = "sluchawki";
+        this.opor = opor;
+        this.ANC = ANC;
     }
 }
