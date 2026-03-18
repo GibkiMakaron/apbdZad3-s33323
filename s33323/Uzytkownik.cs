@@ -6,6 +6,11 @@ public abstract class Uzytkownik
     protected string imie;
     protected string nazwisko;
     protected string typ;
+    
+    public int getId() => this.id;
+    public string getImie() => this.imie;
+    public string getNazwisko() => this.nazwisko;
+    public string getTyp() => this.typ;
 }
 
 public class Student : Uzytkownik
