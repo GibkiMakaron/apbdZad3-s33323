@@ -16,7 +16,7 @@ public class Wypozyczenie
         this.terminZwrotu = dataWypozyczenia.AddDays(14);
     }
 
-    public void ZakonczWypozyczenie() => dataZwrotu = DateOnly.FromDateTime(DateTime.Now);
+    public void ZakonczWypozyczenie(DateOnly data) => dataZwrotu = data;//dataZwrotu = DateOnly.FromDateTime(DateTime.Now);
 
     public double ObliczKare()
     {

@@ -63,7 +63,7 @@ public class Wypozyczalnia
         var w = wypozyczenia.FirstOrDefault(x => x.getSprzet().getId() == sprzetId && x.getDataZwrotu() == null);
         if (w != null)
         {
-            w.ZakonczWypozyczenie();
+            w.ZakonczWypozyczenie(DateOnly.FromDateTime(DateTime.Now));
             w.getSprzet().setDostepny(true);
             
             double kara = w.ObliczKare();
@@ -73,6 +73,21 @@ public class Wypozyczalnia
         else Console.WriteLine("Nie znaleziono aktywnego wypożyczenia dla tego sprzętu.");
     }
 
+    public void Zwroc(int sprzetId, DateOnly data)
+    {
+        var w = wypozyczenia.FirstOrDefault(x => x.getSprzet().getId() == sprzetId && x.getDataZwrotu() == null);
+        if (w != null)
+        {
+            w.ZakonczWypozyczenie(data);
+            w.getSprzet().setDostepny(true);
+            
+            double kara = w.ObliczKare();
+            if (kara > 0) Console.WriteLine($"Sprzęt zwrócony. Naliczono karę: {kara} PLN.");
+            else Console.WriteLine("Sprzęt zwrócony w terminie.");
+        }
+        else Console.WriteLine("Nie znaleziono aktywnego wypożyczenia dla tego sprzętu.");
+    }
+    
     public void ZmienDostepnosc(int sprzetId, bool status)
     {
         var s = sprzety.FirstOrDefault(x => x.getId() == sprzetId);
