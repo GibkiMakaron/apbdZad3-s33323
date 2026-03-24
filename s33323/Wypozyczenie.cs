@@ -2,29 +2,31 @@
 
 public class Wypozyczenie
 {
-    private Object osoba;
-    private Object sprzet;
-    
-    DateOnly dataWypozyczenia;
-    DateOnly terminZwrotu;
-    DateOnly dataZwrotu;
+    private Uzytkownik osoba;
+    private Sprzet sprzet;
+    private DateOnly dataWypozyczenia;
+    private DateOnly terminZwrotu;
+    private DateOnly? dataZwrotu;
 
-    Wypozyczenie(object osoba, object sprzet, DateOnly dataZwrotu)
+    public Wypozyczenie(Uzytkownik osoba, Sprzet sprzet)
     {
         this.osoba = osoba;
         this.sprzet = sprzet;
-        dataWypozyczenia = DateOnly.FromDateTime(DateTime.Now);
-        terminZwrotu = DateOnly.FromDateTime(DateTime.Now.AddMonths(1));
-        this.dataZwrotu = dataZwrotu;
+        this.dataWypozyczenia = DateOnly.FromDateTime(DateTime.Now);
+        this.terminZwrotu = dataWypozyczenia.AddDays(14);
     }
 
-    public Object getOsoba()
+    public void ZakonczWypozyczenie() => dataZwrotu = DateOnly.FromDateTime(DateTime.Now);
+
+    public double ObliczKare()
     {
-        return osoba;
+        if (dataZwrotu == null || dataZwrotu <= terminZwrotu) return 0;
+        TimeSpan roznica = dataZwrotu.Value.ToDateTime(TimeOnly.MinValue) - terminZwrotu.ToDateTime(TimeOnly.MinValue);
+        return roznica.Days * 5.0; // 5 PLN za każdy dzień zwłoki
     }
 
-    public Object getSprzet()
-    {
-        return sprzet;
-    }
+    public Uzytkownik getOsoba() => osoba;
+    public Sprzet getSprzet() => sprzet;
+    public DateOnly getTerminZwrotu() => terminZwrotu;
+    public DateOnly? getDataZwrotu() => dataZwrotu;
 }
