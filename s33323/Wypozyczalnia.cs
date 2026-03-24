@@ -26,14 +26,36 @@ public class Wypozyczalnia
     {
         var uzytkownik = uzytkownicy.FirstOrDefault(u => u.getId() == uzytkownikId);
         var sprzet = sprzety.FirstOrDefault(s => s.getId() == sprzetId);
-
-        if (uzytkownik != null && sprzet != null && sprzet.getDostepny())
+        
+        if (uzytkownik == null || sprzet == null)
         {
-            wypozyczenia.Add(new Wypozyczenie(uzytkownik, sprzet));
-            sprzet.setDostepny(false);
-            Console.WriteLine("Wypożyczono pomyślnie!");
+            Console.WriteLine("Błąd: Nie znaleziono użytkownika lub sprzętu o podanym ID.");
+            return;
         }
-        else Console.WriteLine("Błąd: Nie znaleziono osoby/sprzętu lub sprzęt jest zajęty.");
+        
+        if (!sprzet.getDostepny())
+        {
+            Console.WriteLine($"Błąd: Sprzęt '{sprzet.getNazwa()}' jest obecnie niedostępny (wypożyczony lub w serwisie).");
+            return;
+        }
+        
+        int aktualnieWypozyczone = wypozyczenia.Count(w => 
+            w.getOsoba().getId() == uzytkownikId && w.getDataZwrotu() == null);
+
+        if (aktualnieWypozyczone >= uzytkownik.getLimit())
+        {
+            Console.WriteLine($"Blokada: Użytkownik przekroczył swój limit ({uzytkownik.getLimit()} sztuk).");
+            Console.WriteLine("Zwróć najpierw inny sprzęt, aby móc wypożyczyć kolejny.");
+            return;
+        }
+        
+        Wypozyczenie noweWypozyczenie = new Wypozyczenie(uzytkownik, sprzet);
+        wypozyczenia.Add(noweWypozyczenie);
+        
+        sprzet.setDostepny(false);
+
+        Console.WriteLine($"Sukces! Wypożyczono: {sprzet.getNazwa()} dla {uzytkownik.getNazwisko()}.");
+        Console.WriteLine($"Stan wypożyczeń: {aktualnieWypozyczone + 1} / {uzytkownik.getLimit()}.");
     }
     
     public void Zwroc(int sprzetId)
