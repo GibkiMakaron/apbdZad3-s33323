@@ -3,20 +3,20 @@
 Wypozyczalnia system = new Wypozyczalnia();
 bool dziala = true;
 
-system.DodajUzytkownika(new Student("Bartosz", "Wróbel"));
-system.DodajUzytkownika(new Student("Jan", "Kowalski"));
-system.DodajUzytkownika(new Pracownik("Myślibrak", "Testowy"));
-system.DodajSprzet(new Laptop("Lenovo", 14, "FullHD"));
-system.DodajSprzet(new Laptop("ThinkPad", 13, "HD"));
-system.DodajSprzet(new Aparat("Nicon", "Szerokokątny",  "FullFrame"));
-system.DodajSprzet(new Sluchawki("HyperX", 38, true));
-system.Wypozycz(0, 2);
-system.Wypozycz(0, 0);
-system.Wypozycz(0, 1);
-system.Wypozycz(2, 1);
-system.Zwroc(2, new DateOnly(2026, 3, 30));
-system.Zwroc(0, new DateOnly(2026, 4, 20));
-system.GenerujRaport();
+// system.DodajUzytkownika(new Student("Bartosz", "Wróbel"));
+// system.DodajUzytkownika(new Student("Jan", "Kowalski"));
+// system.DodajUzytkownika(new Pracownik("Myślibrak", "Testowy"));
+// system.DodajSprzet(new Laptop("Lenovo", 14, "FullHD"));
+// system.DodajSprzet(new Laptop("ThinkPad", 13, "HD"));
+// system.DodajSprzet(new Aparat("Nicon", "Szerokokątny",  "FullFrame"));
+// system.DodajSprzet(new Sluchawki("HyperX", 38, true));
+// system.Wypozycz(0, 2);
+// system.Wypozycz(0, 0);
+// system.Wypozycz(0, 1);
+// system.Wypozycz(2, 1);
+// system.Zwroc(2, new DateOnly(2026, 3, 30));
+// system.Zwroc(0, new DateOnly(2026, 4, 20));
+// system.GenerujRaport();
 
 while (dziala)
 {
